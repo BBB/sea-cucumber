@@ -46,7 +46,7 @@ class SendEmailTask(Task):
                 destinations=recipients,
                 raw_message=dkim_sign(message),
             )
-        except SESAddressBlacklistedError, exc:
+        except SESAddressBlacklistedError as exc:
             # Blacklisted users are those which delivery failed for in the
             # last 24 hours. They'll eventually be automatically removed from
             # the blacklist, but for now, this address is marked as
@@ -57,7 +57,7 @@ class SendEmailTask(Task):
                 extra={'trace': True}
             )
             return False
-        except SESDomainEndsWithDotError, exc:
+        except SESDomainEndsWithDotError as exc:
             # Domains ending in a dot are simply invalid.
             logger.warning(
                 'Invalid recipient, ending in dot: %s' % recipients,
@@ -65,7 +65,7 @@ class SendEmailTask(Task):
                 extra={'trace': True}
             )
             return False
-        except SESLocalAddressCharacterError, exc:
+        except SESLocalAddressCharacterError as exc:
             # Invalid character, usually in the sender "name".
             logger.warning(
                 'Local address contains control or whitespace: %s' % recipients,
@@ -73,7 +73,7 @@ class SendEmailTask(Task):
                 extra={'trace': True}
             )
             return False
-        except SESIllegalAddressError, exc:
+        except SESIllegalAddressError as exc:
             # A clearly mal-formed address.
             logger.warning(
                 'Illegal address: %s' % recipients,
@@ -81,7 +81,7 @@ class SendEmailTask(Task):
                 extra={'trace': True}
             )
             return False
-        except Exception, exc:
+        except Exception as exc:
             # Something else happened that we haven't explicitly forbade
             # retry attempts for.
             #noinspection PyUnresolvedReferences

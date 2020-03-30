@@ -15,16 +15,16 @@ CLASSIFIERS = [
 ]
 
 setup(
-    name='seacucumber',
-    version='1.5.2',
+    name='seacucumber-py3',
+    version='1.6.0',
     packages=[
         'seacucumber',
         'seacucumber.management',
         'seacucumber.management.commands',
     ],
-    author='Gregory Taylor',
-    author_email='gtaylor@duointeractive.com',
-    url='https://github.com/duointeractive/sea-cucumber/',
+    author='Ollie Relph',
+    author_email='ollie@relph.me',
+    url='https://github.com/BBB/sea-cucumber/',
     license='MIT',
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
